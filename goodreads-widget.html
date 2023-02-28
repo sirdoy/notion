@@ -1,15 +1,18 @@
 <style type="text/css" media="screen">
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* using display flex with containers gr_grid_container and items gr_grid_book_container, display 5 items per row */
     .gr_grid_container {
-        /* customize grid container div here. eg: width: 500px; */
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .gr_grid_book_container {
-        /* customize book cover container div here */
-        float: left;
-        width: 39px;
-        height: 60px;
-        padding: 0px 0px;
-        overflow: hidden;
+        width: calc(100% / 6);
     }
 </style>
 <div id="gr_grid_widget_1652089733">
@@ -18,7 +21,7 @@
   </div>
 </div>
 <script
-    src="https://www.goodreads.com/review/grid_widget/131131600?cover_size=&hide_link=&hide_title=&num_books=20&order=&shelf=&sort=&widget_id=1652089733"
+    src="https://www.goodreads.com/review/grid_widget/131131600?cover_size=&hide_link=&hide_title=&num_books=24&order=&shelf=&sort=&widget_id=1652089733"
     type="text/javascript" charset="utf-8">
 </script>
 <script type="text/javascript" charset="utf-8">
@@ -34,5 +37,18 @@
   document.querySelectorAll('#gr_grid_widget_1652089733 > h2').forEach(function (h2) {
     h2.parentNode.removeChild(h2);
   });
+  // change image size
+  document.querySelectorAll('.gr_grid_book_container > a > img').forEach(function (img) {
+    // in image src replace SX50 with SXn where n is the size in pixels of width of window divided by 6
+    // get the width of the window
+    var width = window.innerWidth;
+    // get the number of books per row
+    var numBooksPerRow = 6;
+    // get the size of the image
+    var imageSize = width / numBooksPerRow;
+    // get the size of the image as a string
+    var imageSizeString = imageSize.toString();
 
+    img.src = img.src.replace('SX50', 'SX' + imageSizeString);
+  });
 </script>
