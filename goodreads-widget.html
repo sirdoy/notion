@@ -39,6 +39,7 @@
   });
   // change image size
   document.querySelectorAll('.gr_grid_book_container > a > img').forEach(function (img) {
+    console.log(img.src);
     // in image src replace SX50 with SXn where n is the size in pixels of width of window divided by 6
     // get the width of the window
     var width = window.innerWidth;
@@ -46,9 +47,14 @@
     var numBooksPerRow = 6;
     // get the size of the image
     var imageSize = width / numBooksPerRow;
+    // cast the size of the image to an integer
+    imageSize = parseInt(imageSize);
     // get the size of the image as a string
     var imageSizeString = imageSize.toString();
-
-    img.src = img.src.replace('SX50', 'SX' + imageSizeString);
+    if (img.src.includes('._SX')) {
+      img.src = img.src.replace('SX50', 'SX' + imageSizeString);
+    } else {
+      img.src = img.src.replace('SY75', 'SX' + imageSizeString);
+    }
   });
 </script>
